@@ -10,8 +10,11 @@ function App() {
       <div className="App">
         <Nav />
         <Routes>
-          <Route path="/" element={<CreatePost />} />
-          <Route path="/manage-posts" element={<ManagePosts />} />
+          <Route path="/BlogManagement/" element={<CreatePost />} />
+          <Route
+            path="/BlogManagement/manage-posts"
+            element={<ManagePosts />}
+          />
         </Routes>
       </div>
     </Router>
