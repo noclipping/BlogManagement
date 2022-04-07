@@ -22,13 +22,29 @@ export default function PostCard(props) {
         console.log(res);
       });
   }
-
+  const theStyle = {
+    content: "",
+    backgroundImage: 'url("https://i.imgur.com/nhX3VEW.jpeg")',
+    backgroundSize: "cover",
+    position: "absolute",
+    top: "0px",
+    right: "0px",
+    bottom: "0px",
+    left: "0px",
+    opacity: 0.35,
+  };
   return (
     <div
       key={post._id}
       class="post-backdrop"
-      style={{ backgroundImage: `url("https://i.imgur.com/nhX3VEW.jpeg")` }}
+      style={{
+        // backgroundImage: `url("https://i.imgur.com/nhX3VEW.jpeg")`,
+        // opacity: "0.5",
+        position: "relative",
+      }}
     >
+      <div style={theStyle}></div>
+      <p style={{ display: "inline", position: "relative" }}>Publish : </p>
       <label className="switch">
         <input
           type="checkbox"
@@ -37,8 +53,10 @@ export default function PostCard(props) {
         />
         <span className="slider round"></span>
       </label>
-      {post.title}
-      {post.content}
+      <span style={{ position: "relative" }}>
+        {post.title}
+        {post.content}
+      </span>
     </div>
   );
 }
