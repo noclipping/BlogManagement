@@ -3,18 +3,22 @@ import { Editor } from "@tinymce/tinymce-react";
 import Modal from "./components/Modal";
 export default function CreatePost() {
   const [modalToggle, setModalToggle] = useState(false);
+  // const [author, setAuthor] = useState('')
+  // const [title, setTitle] = useState('')
   const editorRef = useRef(null);
-  const log = () => {
+  const log = (author, title) => {
     if (editorRef.current) {
       console.log(editorRef.current.getContent());
+      console.log("affirm");
       fetch("http://localhost:3000/api/post/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title: "?",
+          title: title,
           content: editorRef.current.getContent(),
+          author: author,
         }),
       })
         .then((res) => res.json())
@@ -31,7 +35,7 @@ export default function CreatePost() {
 
   return (
     <div>
-      <Modal showModal={showModal} modalToggle={modalToggle} />
+      <Modal showModal={showModal} modalToggle={modalToggle} submitPost={log} />
       <Editor
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue="<p>This is the initial content of the editor.</p>"
@@ -56,8 +60,9 @@ export default function CreatePost() {
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      <p>TEST</p>
-      <button onClick={showModal}>Create Post</button>
+      <a className="button1" onClick={showModal}>
+        Create Post
+      </a>
       {/* <button onClick={log}>Log editor content</button> */}
     </div>
   );
