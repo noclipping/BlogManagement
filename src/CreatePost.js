@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-
+import Modal from "./components/Modal";
 export default function CreatePost() {
+  const [modalToggle, setModalToggle] = useState(false);
   const editorRef = useRef(null);
   const log = () => {
     if (editorRef.current) {
@@ -22,9 +23,15 @@ export default function CreatePost() {
         });
     }
   };
+
   useEffect(() => {}, []);
+  const showModal = function () {
+    setModalToggle(!modalToggle);
+  };
+
   return (
-    <>
+    <div>
+      <Modal showModal={showModal} modalToggle={modalToggle} />
       <Editor
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue="<p>This is the initial content of the editor.</p>"
@@ -49,7 +56,9 @@ export default function CreatePost() {
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      <button onClick={log}>Log editor content</button>
-    </>
+      <p>TEST</p>
+      <button onClick={showModal}>Create Post</button>
+      {/* <button onClick={log}>Log editor content</button> */}
+    </div>
   );
 }
