@@ -12,12 +12,13 @@ export default function ManagePosts() {
         console.log(data);
       });
   }, []);
-  const comps = posts
-    ? posts.map((post) => {
-        return <PostCard post={post} key={post._id} checked={post.published} />;
-      })
-    : "";
-
+  const deletePost = function (id) {
+    setPosts((prev) => {
+      const newArry = prev.filter((e) => (e._id === id ? false : true));
+      return newArry;
+    });
+    console.log(posts);
+  };
   //   const comps = posts
   //     ? posts.map((post) => {
   //         return <div dangerouslySetInnerHTML={{ __html: post.content }} />;
@@ -28,8 +29,20 @@ export default function ManagePosts() {
     <div>
       <br />
       <div>Manage Posts</div>
+      <button onClick={deletePost}>press</button>
       <br /> <hr /> <br />
-      {comps}
+      {posts
+        ? posts.map((post) => {
+            return (
+              <PostCard
+                deletePost={deletePost}
+                post={post}
+                key={post._id}
+                checked={post.published}
+              />
+            );
+          })
+        : ""}
     </div>
   );
 }

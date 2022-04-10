@@ -22,6 +22,16 @@ export default function PostCard(props) {
         console.log(res);
       });
   }
+  function deletePost() {
+    fetch(`http://localhost:3000/api/post/delete/${post._id}`, {
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        props.deletePost(post._id);
+      });
+  }
   const theStyle = {
     content: "",
     backgroundImage: 'url("https://i.imgur.com/nhX3VEW.jpeg")',
@@ -36,7 +46,7 @@ export default function PostCard(props) {
   return (
     <div
       key={post._id}
-      class="post-backdrop"
+      className="post-backdrop"
       style={{
         // backgroundImage: `url("https://i.imgur.com/nhX3VEW.jpeg")`,
         // opacity: "0.5",
@@ -56,6 +66,15 @@ export default function PostCard(props) {
       <span style={{ position: "relative" }}>
         {post.title}
         {post.content}
+
+        <button
+          onClick={(e) => {
+            deletePost();
+            console.log("button pressed");
+          }}
+        >
+          X
+        </button>
       </span>
     </div>
   );
