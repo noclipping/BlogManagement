@@ -17,19 +17,11 @@ export default function ManagePosts() {
       const newArry = prev.filter((e) => (e._id === id ? false : true));
       return newArry;
     });
-    console.log(posts);
   };
-  //   const comps = posts
-  //     ? posts.map((post) => {
-  //         return <div dangerouslySetInnerHTML={{ __html: post.content }} />;
-  //       })
-  //     : "";
-  //   return (
   return (
     <div>
       <br />
       <div>Manage Posts</div>
-      <button onClick={deletePost}>press</button>
       <br /> <hr /> <br />
       {posts
         ? posts.map((post) => {
