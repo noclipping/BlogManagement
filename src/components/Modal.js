@@ -3,7 +3,17 @@ import React, { useEffect, useState } from "react";
 export default function Modal(props) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-
+  const [errors, setErrors] = useState("");
+  function validateInfo() {
+    if (!title.length > 0) {
+      setErrors("Title empty!");
+    } else if (!author.length > 0) {
+      setErrors("Author is empty!");
+    } else {
+      setErrors("");
+      props.submitPost(author, title);
+    }
+  }
   return (
     <div
       id="myModal"
@@ -43,10 +53,9 @@ export default function Modal(props) {
             />
           </form>
           <br />
-          <a
-            className="button1"
-            onClick={(e) => props.submitPost(author, title)}
-          >
+
+          <div style={{ color: "red" }}>{errors ? errors : ""}</div>
+          <a className="button1" onClick={(e) => validateInfo()}>
             Submit
           </a>
         </div>
