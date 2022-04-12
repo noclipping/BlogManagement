@@ -10,10 +10,20 @@ function App() {
       <div className="App">
         <Nav />
         <Routes>
-          <Route path="/BlogManagement/" element={<CreatePost />} />
+          <Route exact path="/BlogManagement/" element={<CreatePost />} />
           <Route
+            exact
             path="/BlogManagement/manage-posts"
             element={<ManagePosts />}
+          />
+          <Route path="/BlogManagement/:id" element={<CreatePost />} />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>There's nothing here!</p>
+              </main>
+            }
           />
         </Routes>
       </div>
