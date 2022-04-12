@@ -1,10 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import Modal from "./components/Modal";
+import { useParams } from "react-router-dom";
 export default function CreatePost() {
   const [modalToggle, setModalToggle] = useState(false);
-  // const [author, setAuthor] = useState('')
-  // const [title, setTitle] = useState('')
+  const [initialState, setInitialState] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const params = useParams();
+  useEffect(() => {
+    if (params.id) {
+      fetch(`http://localhost:3000/api/post/${params.id}`)
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          setInitialState(res[0].content);
+          setIsEditing(true);
+        });
+    }
+  }, []);
   const editorRef = useRef(null);
   const log = (author, title) => {
     if (editorRef.current) {
@@ -32,13 +45,32 @@ export default function CreatePost() {
   const showModal = function () {
     setModalToggle(!modalToggle);
   };
+  const updatePost = function () {
+    if (editorRef.current) {
+      console.log(editorRef.current.getContent());
+      fetch(`http://localhost:3000/api/post/update/${params.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: editorRef.current.getContent(),
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
+  };
 
   return (
     <div>
+      <div>{params.id}</div>
       <Modal showModal={showModal} modalToggle={modalToggle} submitPost={log} />
       <Editor
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>This is the initial content of the editor.</p>"
+        initialValue={initialState}
         apiKey={process.env.REACT_APP_API_KEY}
         init={{
           skin: "oxide-dark",
@@ -60,9 +92,15 @@ export default function CreatePost() {
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      <a className="button1" onClick={showModal}>
-        Create Post
-      </a>
+      {!isEditing ? (
+        <a className="button1" onClick={showModal}>
+          Create Post
+        </a>
+      ) : (
+        <a className="button1" onClick={updatePost}>
+          Update Post
+        </a>
+      )}
       {/* <button onClick={log}>Log editor content</button> */}
     </div>
   );
