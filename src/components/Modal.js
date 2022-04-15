@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { domain } from "../constants";
 export default function Modal(props) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");

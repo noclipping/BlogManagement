@@ -2,7 +2,7 @@ import { findByLabelText } from "@testing-library/react";
 import { hover } from "@testing-library/user-event/dist/hover";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { domain } from "../constants";
 export default function PostCard(props) {
   const post = props.post;
   const [checked, setChecked] = useState(props.checked);
@@ -10,7 +10,7 @@ export default function PostCard(props) {
 
   function updatePublished() {
     setChecked(!checked);
-    fetch("http://localhost:3000/api/post/publish", {
+    fetch(`${domain}api/post/publish`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export default function PostCard(props) {
       });
   }
   function deletePost() {
-    fetch(`http://localhost:3000/api/post/delete/${post._id}`, {
+    fetch(`${domain}api/post/delete/${post._id}`, {
       method: "POST",
     })
       .then((res) => res.json())
