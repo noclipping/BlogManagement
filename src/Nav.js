@@ -5,10 +5,10 @@ export default function Nav() {
     <div>
       <ul>
         <li>
-          <Link to="/BlogManagement/"> Create Post</Link>
+          <Link to="/"> Create Post</Link>
         </li>
         <li>
-          <Link to="/BlogManagement/manage-posts">Manage Posts</Link>
+          <Link to="/manage-posts">Manage Posts</Link>
         </li>
       </ul>
     </div>

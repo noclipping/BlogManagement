@@ -10,13 +10,9 @@ function App() {
       <div className="App">
         <Nav />
         <Routes>
-          <Route exact path="/BlogManagement/" element={<CreatePost />} />
-          <Route
-            exact
-            path="/BlogManagement/manage-posts"
-            element={<ManagePosts />}
-          />
-          <Route path="/BlogManagement/:id" element={<CreatePost />} />
+          <Route exact path="/" element={<CreatePost />} />
+          <Route exact path="/manage-posts" element={<ManagePosts />} />
+          <Route path="/:id" element={<CreatePost />} />
           <Route
             path="*"
             element={
