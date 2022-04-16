@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import Modal from "./components/Modal";
 import { useParams } from "react-router-dom";
+import { domain } from "./constants";
+
 export default function CreatePost() {
   const [modalToggle, setModalToggle] = useState(false);
   const [initialState, setInitialState] = useState("");
@@ -9,7 +11,7 @@ export default function CreatePost() {
   const params = useParams();
   useEffect(() => {
     if (params.id) {
-      fetch(`http://localhost:3000/api/post/${params.id}`)
+      fetch(`${domain}api/post/${params.id}`)
         .then((res) => res.json())
         .then((res) => {
           console.log(res);
@@ -48,7 +50,7 @@ export default function CreatePost() {
   const updatePost = function () {
     if (editorRef.current) {
       console.log(editorRef.current.getContent());
-      fetch(`http://localhost:3000/api/post/update/${params.id}`, {
+      fetch(`${domain}api/post/update/${params.id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
