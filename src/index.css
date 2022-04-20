@@ -189,7 +189,7 @@ input:checked + .slider:before {
   height: 30%;
   color: green;
   font-size: 0px;
-  animation-duration: 4s;
+  animation-duration: 2s;
   animation-name: slidein;
 }
 

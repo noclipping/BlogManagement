@@ -27,7 +27,7 @@ export default function CreatePost() {
     if (editorRef.current) {
       console.log(editorRef.current.getContent());
       console.log("affirm");
-      fetch("http://localhost:3000/api/post/create", {
+      fetch(`${domain}api/post/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +74,9 @@ export default function CreatePost() {
 
   return (
     <div>
-      <div className="postUpdated">{postUpdated ? "Post updated!" : ""}</div>
+      <div>
+        {postUpdated ? <div className="postUpdated">Post updated!</div> : ""}
+      </div>
       <div style={{ backgroundColor: "black" }}>
         {isEditing ? "editing mode" : ""}
       </div>

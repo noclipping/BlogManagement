@@ -5,7 +5,7 @@ export default function Nav() {
     <div>
       <ul>
         <li>
-          <Link to="/"> Create Post</Link>
+          <Link to="/newpost"> Create Post</Link>
         </li>
         <li>
           <Link to="/manage-posts">Manage Posts</Link>
