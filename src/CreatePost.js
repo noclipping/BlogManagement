@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import Modal from "./components/Modal";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { domain } from "./constants";
 
 export default function CreatePost() {
+  const navigate = useNavigate();
   const [modalToggle, setModalToggle] = useState(false);
   const [initialState, setInitialState] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const [postUpdated, setPostUpdated] = useState(false);
   const params = useParams();
   useEffect(() => {
     if (params.id) {
@@ -62,13 +64,20 @@ export default function CreatePost() {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          setPostUpdated(true);
+          setTimeout(() => {
+            navigate("/manage-posts");
+          }, 3000);
         });
     }
   };
 
   return (
     <div>
-      <div>{params.id}</div>
+      <div className="postUpdated">{postUpdated ? "Post updated!" : ""}</div>
+      <div style={{ backgroundColor: "black" }}>
+        {isEditing ? "editing mode" : ""}
+      </div>
       <Modal showModal={showModal} modalToggle={modalToggle} submitPost={log} />
       <Editor
         onInit={(evt, editor) => (editorRef.current = editor)}
