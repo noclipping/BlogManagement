@@ -97,7 +97,7 @@ export default function PostCard(props) {
           DELETE
         </button>
         <Link
-          to={`/BlogManagement/${post._id}`}
+          to={`/${post._id}`}
           style={{
             position: "relative",
             height: "fill",
