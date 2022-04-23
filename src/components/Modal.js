@@ -58,7 +58,7 @@ export default function Modal(props) {
                                 setAuthor(e.target.value)
                             }}
                         />
-
+                        <br />
                         <label>Image URL (optional)</label>
                         <br />
                         <input
