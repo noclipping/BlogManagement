@@ -4,6 +4,7 @@ import Nav from "./Nav";
 import CreatePost from "./CreatePost";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ManagePosts from "./ManagePosts";
+import UpdatePost from "./components/UpdatePost";
 function App() {
   return (
     <Router>
@@ -12,7 +13,7 @@ function App() {
         <Routes>
           <Route exact path="/newpost" element={<CreatePost />} />
           <Route exact path="/manage-posts" element={<ManagePosts />} />
-          <Route exact path="/:id" element={<CreatePost />} />
+          <Route exact path="/:id" element={<UpdatePost />} />
           <Route
             path="*"
             element={
