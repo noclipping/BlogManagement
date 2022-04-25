@@ -5,6 +5,7 @@ export default function Modal(props) {
     const [author, setAuthor] = useState('')
     const [imgURL, setimgURL] = useState('')
     const [errors, setErrors] = useState('')
+    const [description, setDescription] = useState('')
     function submitAndValidateInfo() {
         if (!title.length > 0) {
             setErrors('Title empty!')
@@ -13,7 +14,7 @@ export default function Modal(props) {
         } else {
             setErrors('')
             // THIS IS WHERE THE SUBMISSION HAPPENS
-            props.submitPost(author, title, imgURL)
+            props.submitPost(author, title, imgURL, description)
         }
     }
     return (
@@ -56,6 +57,16 @@ export default function Modal(props) {
                             name="author"
                             onChange={(e) => {
                                 setAuthor(e.target.value)
+                            }}
+                        />
+                        <br />
+                        <label>Description</label>
+                        <br />
+                        <input
+                            id="description"
+                            name="description"
+                            onChange={(e) => {
+                                setDescription(e.target.value)
                             }}
                         />
                         <br />

@@ -19,7 +19,7 @@ export default function CreatePost() {
         }
     }, [])
     const editorRef = useRef(null)
-    const log = (author, title, imgURL) => {
+    const log = (author, title, imgURL, description) => {
         if (editorRef.current) {
             console.log(editorRef.current.getContent())
             console.log('affirm')
@@ -33,6 +33,7 @@ export default function CreatePost() {
                     content: editorRef.current.getContent(),
                     author: author,
                     imgURL: imgURL,
+                    description: description,
                 }),
             })
                 .then((res) => res.json())
