@@ -13,7 +13,7 @@ export default function Modal(props) {
         } else {
             setErrors('')
             // THIS IS WHERE THE SUBMISSION HAPPENS
-            props.submitPost(author, title)
+            props.submitPost(author, title, imgURL)
         }
     }
     return (
