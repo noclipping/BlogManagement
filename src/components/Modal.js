@@ -62,10 +62,11 @@ export default function Modal(props) {
                         <br />
                         <label>Description</label>
                         <br />
-                        <input
+                        <textarea
                             id="description"
                             name="description"
                             onChange={(e) => {
+                                console.log(e.target.value)
                                 setDescription(e.target.value)
                             }}
                         />

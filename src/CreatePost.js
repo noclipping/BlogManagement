@@ -32,7 +32,7 @@ export default function CreatePost() {
                     title: title,
                     content: editorRef.current.getContent(),
                     author: author,
-                    imgURL: imgURL,
+                    ...(imgURL.length > 5 && { imgURL: imgURL }),
                     description: description,
                 }),
             })
